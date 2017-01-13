@@ -10,6 +10,14 @@ export default class FileDialog extends Component {
     directory: this.props.directory || '',
   };
 
+  componentWillMount() {
+    if (this.state.directory) {
+      const [product, vendor] = this.state.directory.split(/\//).reverse();
+      this.state.product = product;
+      this.state.vendor = vendor;
+    }
+  }
+
   render() {
     if (Reactors.platform !== 'desktop') {
       return <View />;
