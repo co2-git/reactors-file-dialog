@@ -32,3 +32,9 @@ import {dialog} from 'reactors-file-dialog';
     />
 </View>
 ```
+
+# Props
+
+- `string color` Color of icon and text
+- `(filePaths: string[]) => any onChange` Callback function on file selection change
+- `(error: Error) => any onError` Callback function for eventual errors 

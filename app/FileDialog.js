@@ -23,14 +23,18 @@ export default class FileDialog extends Component {
       return <View />;
     }
 
+    const {color, onChange, onError} = this.props;
+
+    const style = {
+      color: color || 'black',
+    };
+
     return (
       <Row left>
         <Icon
           name="folder"
           onPress={async () => {
             try {
-              const {onChange} = this.props;
-
               const filePaths = await dialog.open();
 
               if (filePaths.length) {
@@ -44,11 +48,16 @@ export default class FileDialog extends Component {
                 );
               }
             } catch (error) {
-              console.log(error.stack);
+              if (typeof onError === 'function') {
+                onError(error);
+              }
             }
           }}
+          style={style}
           />
-        <Text>{this.state.vendor} / {this.state.product}</Text>
+        <Text style={style}>
+          {this.state.vendor} / {this.state.product}
+        </Text>
       </Row>
     );
   }
